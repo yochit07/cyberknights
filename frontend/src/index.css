@@ -1,0 +1,316 @@
+/* ============================================
+   Cyber Knights — Global Design System
+   Premium Cyberpunk Edition
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* CSS Variables */
+:root {
+  /* Colors - Curated "Midnight Neon" Palette */
+  --clr-bg-primary: #05080a;
+  --clr-bg-secondary: #0a0f14;
+  --clr-bg-card: #0d141b;
+  --clr-bg-glass: rgba(10, 15, 20, 0.75);
+  --clr-border: rgba(0, 243, 255, 0.15);
+  --clr-border-bright: rgba(0, 243, 255, 0.4);
+
+  /* Neon Accents */
+  --clr-cyan: #00f3ff;
+  --clr-cyan-rgb: 0, 243, 255;
+  --clr-purple: #bc13fe;
+  --clr-purple-rgb: 188, 19, 254;
+  --clr-green: #00ff9f;
+  --clr-green-rgb: 0, 255, 159;
+  --clr-yellow: #ffea00;
+  --clr-red: #ff0055;
+
+  /* Text */
+  --clr-text-primary: #f0faff;
+  --clr-text-secondary: #a1b1c1;
+  --clr-text-muted: #556677;
+
+  /* Typography */
+  --font-heading: 'Orbitron', sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Effects */
+  --glow-cyan: 0 0 15px rgba(var(--clr-cyan-rgb), 0.3);
+  --glow-purple: 0 0 15px rgba(var(--clr-purple-rgb), 0.3);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.8);
+
+  --transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--clr-bg-primary);
+  color: var(--clr-text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Scanline Effect Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg,
+      rgba(255, 0, 0, 0.02),
+      rgba(0, 255, 0, 0.01),
+      rgba(0, 0, 255, 0.02));
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.5;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--clr-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--clr-border-bright);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--clr-cyan);
+}
+
+/* Layout */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-left: 260px;
+  background: radial-gradient(circle at 50% 50%, #0d141b 0%, #05080a 100%);
+  transition: margin var(--transition);
+}
+
+.page-container {
+  flex: 1;
+  padding: 40px;
+  max-width: 1400px;
+  width: 100%;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Premium Glass Card */
+.card {
+  background: var(--clr-bg-glass);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  padding: 24px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--clr-border-bright);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9), var(--glow-cyan);
+}
+
+/* Cyber Decorative Corners */
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, transparent 50%, var(--clr-cyan) 50%);
+  opacity: 0.1;
+  transition: var(--transition);
+}
+
+.card:hover::after {
+  opacity: 0.6;
+}
+
+/* Typography Overrides */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--clr-cyan), var(--clr-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 8px rgba(var(--clr-cyan-rgb), 0.3));
+}
+
+/* Buttons */
+.btn {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 700;
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+}
+
+.btn-primary {
+  background: var(--clr-cyan);
+  color: #000;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: #fff;
+  box-shadow: 0 0 20px var(--clr-cyan);
+  transform: scale(1.05);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--clr-cyan);
+  border: 1px solid var(--clr-cyan);
+}
+
+.btn-outline:hover {
+  background: rgba(var(--clr-cyan-rgb), 0.1);
+  box-shadow: inset 0 0 10px var(--clr-cyan);
+}
+
+/* Badges */
+.badge {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  border-width: 1px;
+  padding: 2px 12px;
+  font-size: 11px;
+  clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+}
+
+/* Grid & Utilities */
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+.alert {
+  border-radius: 4px;
+  border-left-width: 4px;
+  font-family: var(--font-mono);
+}
+
+/* Input Styles */
+.form-input {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--clr-border);
+  font-family: var(--font-mono);
+  transition: all var(--transition);
+}
+
+.form-input:focus {
+  border-color: var(--clr-cyan);
+  box-shadow: 0 0 15px rgba(var(--clr-cyan-rgb), 0.2);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* Custom Micro-Animations */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, 2px);
+  }
+
+  80% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+.page-title:hover {
+  animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
